@@ -10,12 +10,26 @@ const socialMedia = function displaySocialMedia() {
                             "DesignIG: https://www.instagram.com/thegospelofweeb.designs", 
                             "Mastodon: https://koyu.space/@thegospelofweeb"];
     
-    for (let i = 0; i < socialMediaArr.length; i++)
+    //for (let i = 0; i < socialMediaArr.length; i++);
 
     return (socialMediaArr.join(" "));
 }
 
+const commandList = function displaycommands() {
+    let commandList = [
+        '!lurk',
+        '!cockcheck',
+        '!socialmedia'
+    ]
+
+    //for(let i = 0; i < commandList.length; i++);
+
+    return (commandList.join(" "));
+}
+
+
 module.exports = {
     cock,
-    socialMedia
+    socialMedia,
+    commandList
 };
