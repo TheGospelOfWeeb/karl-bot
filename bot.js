@@ -1,9 +1,9 @@
 require('dotenv').config();
 const commands = require('./functions/commandFunctions.js');
+const getCurrentlyPlaying = require('./functions/spotifyAPI.js');
 
 const tmi = require('tmi.js');
 
-//const regexp = new RegExp(/^!([a-zA-Z0-9]+)(?:\W+)?(.*)?/);
 
 const client = new tmi.Client({
 	options: { debug: true },
@@ -25,6 +25,7 @@ client.on('message', (channel, tags, message, self) => {
 	const randomNum = commands.cock(); 
 	const socialMediaLinks = commands.socialMedia();
 	const commandDisplay = commands.commandList();
+	const getCurrentlyPlayingTrack = getCurrentlyPlaying.getToken();
 
 	if(message.toLowerCase() === '!cockcheck') {
 		
@@ -51,5 +52,12 @@ client.on('message', (channel, tags, message, self) => {
 		console.log(commandDisplay);
 		
 	}
+
+	else if(message.toLowerCase() === '!song') {
+
+		client.say(channel, `@${tags.username}, ${getCurrentlyPlayingTrack}`);
+		console.log(getCurrentlyPlayingTrack);
+	}
 }); 
+
 

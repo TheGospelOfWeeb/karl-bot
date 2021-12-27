@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/TheGospelOfWeeb/karl-bot#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "dotenv": "^8.2.0",
     "i": "^0.3.7",
     "npm": "^8.1.3",
