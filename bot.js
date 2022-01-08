@@ -1,7 +1,5 @@
 require('dotenv').config();
 const commands = require('./functions/commandFunctions.js');
-const getCurrentlyPlaying = require('./functions/spotifyAPI.js');
-
 const tmi = require('tmi.js');
 
 
@@ -17,7 +15,7 @@ const client = new tmi.Client({
 client.connect();
 
 //commands
-client.on('message', (channel, tags, message, self) => {
+ client.on('message', (channel, tags, message, self) => {
 	// Ignore echoed messages.
 	if(self) return;
 	if(tags.username === process.env.USER_NAME) return;
@@ -25,7 +23,7 @@ client.on('message', (channel, tags, message, self) => {
 	const randomNum = commands.cock(); 
 	const socialMediaLinks = commands.socialMedia();
 	const commandDisplay = commands.commandList();
-	const getCurrentlyPlayingTrack = getCurrentlyPlaying.getToken();
+	const currentPlayingSong = commands.currentPlayingSongFoobar2000();
 
 	if(message.toLowerCase() === '!cockcheck') {
 		
@@ -54,10 +52,12 @@ client.on('message', (channel, tags, message, self) => {
 	}
 
 	else if(message.toLowerCase() === '!song') {
-
-		client.say(channel, `@${tags.username}, ${getCurrentlyPlayingTrack}`);
-		console.log(getCurrentlyPlayingTrack);
+		
+		client.say(channel, `@${tags.username}, ${currentPlayingSong}`);
+		console.log(currentPlayingSong);
+		
 	}
+
 }); 
 
 
