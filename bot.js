@@ -12,7 +12,12 @@ const client = new tmi.Client({
 	channels: [ 'thegospelofweeb' ]
 });
 
-client.connect();
+client.connect().then(() => {
+	console.log('connected')
+}) .catch(err => {
+	console.log(err);
+});
+
 
 //commands
  client.on('message', (channel, tags, message, self) => {
@@ -23,7 +28,8 @@ client.connect();
 	const randomNum = commands.cock(); 
 	const socialMediaLinks = commands.socialMedia();
 	const commandDisplay = commands.commandList();
-	const currentPlayingSong = commands.currentPlayingSongFoobar2000();
+	
+	
 
 	if(message.toLowerCase() === '!cockcheck') {
 		
@@ -52,12 +58,15 @@ client.connect();
 	}
 
 	else if(message.toLowerCase() === '!song') {
-		
-		client.say(channel, `@${tags.username}, ${currentPlayingSong}`);
-		console.log(currentPlayingSong);
+		const currentPlayingSong = commands.getCoke().then((data)=> { 
+			client.say(channel, `@${tags.username}, ${data}`)
+			//console.log(":)", data)
+		});
+
+		//client.say(channel, `@${tags.username}, ${currentPlayingSong}`);
+		//console.log("Coming from here", currentPlayingSong);
 		
 	}
 
-}); 
-
+});
 

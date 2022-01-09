@@ -1,49 +1,29 @@
 const axios = require('axios');
-/*const https = require('https');
+require('dotenv').config();
 
-const currentPlayingSongFoobar2000 = async function getCurrentPlayingSong() {
-  await https.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', (resp) => {
-    let data = '';
-
-  // A chunk of data has been received.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log(JSON.parse(data).explanation);
-    return ((data).explanation);
-  });
-
-  }).on("error", (err) => {
-    console.log("Error: " + err.message);
-  });
-}
-*/
-
-/*const currentPlayingSongFoobar2000 = async () => {
-
-await axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-  .then(response => {
-    return(response.data.explanation);
-    //console.log(response.data.explanation);
+const currentPlayingSongFoobar2000 = () => {
+  return new Promise((resolve, reject) => {
+    axios.get(process.env.FOOBAR_API)
+    .then(response => {
+      console.log("cock", response);
+      resolve (`${(response.data.player.activeItem.columns[0])} - ${(response.data.player.activeItem.columns[1])}`);
+      
+    })
+    .catch(error => {
+      reject (error)
+      console.log(error);
+    });
   })
-  .catch(error => {
-    console.log(error);
-  });
-}
-*/
-const currentPlayingSongFoobar2000 = async () => {
-  try {
-    let resp = await axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
-    console.log(resp.data.explanation);
-    return resp.data.explanation;
-  } catch (err) {
-    console.error(err);
   }
-};
-
+  async function getCoke(){
+    try {
+      const data = await currentPlayingSongFoobar2000();
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
 
 const cock = function rollDiceCock() {
     const dice = 12;
@@ -56,8 +36,6 @@ const socialMedia = function displaySocialMedia() {
                             "Instagram: https://www.instagram.com/thegospelofweeb", 
                             "DesignIG: https://www.instagram.com/thegospelofweeb.designs", 
                             "Mastodon: https://koyu.space/@thegospelofweeb"];
-    
-    //for (let i = 0; i < socialMediaArr.length; i++);
 
     return (socialMediaArr.join(" "));
 }
@@ -69,8 +47,6 @@ const commandList = function displaycommands() {
         '!socialmedia'
     ]
 
-    //for(let i = 0; i < commandList.length; i++);
-
     return (commandList.join(" "));
 }
 
@@ -80,5 +56,6 @@ module.exports = {
     cock,
     socialMedia,
     commandList,
-    currentPlayingSongFoobar2000
+    currentPlayingSongFoobar2000,
+    getCoke
 };
