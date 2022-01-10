@@ -44,7 +44,8 @@ const commandList = function displaycommands() {
     let commandList = [
         '!lurk',
         '!cockcheck',
-        '!socialmedia'
+        '!socialmedia',
+        '!song'
     ]
 
     return (commandList.join(" "));
